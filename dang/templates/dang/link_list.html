@@ -1,0 +1,19 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Články</h1>
+  {% if link_list %}
+  <ul>
+    {% for link in link_list %}
+      <li>
+        <a href="{{ link.url }}">{{ link.title }}</a>
+        
+      </li>
+      {{ link.views }} zhlédnutí | přidáno {{ link.created_date }} | {{ link.category }}
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There are no links.</p>
+  {% endif %}       
+{% endblock %}
+

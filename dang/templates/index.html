@@ -1,0 +1,54 @@
+{% extends "base_generic.html" %}
+{% block content %}
+
+  <h1>Přehled ze světa investic</h1>
+  <p>Odkazy na zajímavé články s investiční tématikou</p>
+  
+		<div class="row">
+			<div class="column">
+				<h3>Oblíbené rubriky</h3>	
+			
+         	{% if categories %}
+             <ul class="box-left">
+                 {% for category in categories %}
+                 <li><a href="{% url 'show_category' category.slug %}">{{ category.name }}</a></li>
+                 
+                 {% endfor %}
+             </ul>
+        {% else %}
+             <strong>There are no categories present.</strong>
+        {% endif %}
+			</div>
+			
+				
+			
+					<div class="column">
+						<h3>Oblíbené články</h3>	
+					
+	         	   {% if pages %}
+	             	<ul class="box-right">
+	                 {% for page in pages %}
+	                 <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+	                 {% endfor %}
+	             </ul>
+	        {% else %}
+	             <strong>There are no categories present.</strong>
+	        {% endif %}
+			</div>
+            </div>  
+ <h2>Poslední přidané články</h2> 
+ <div> 
+ 	         	   {% if last_added %}
+	             	<ul class="news-index">
+	                 {% for page in last_added %}
+	                 <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+                     {{ page.views }} zhlédnutí | přidáno {{ page.created_date }} | {{ page.category }}
+	                 {% endfor %}
+	             </ul>
+	        {% else %}
+	             <strong>There are no categories present.</strong>
+	        {% endif %}
+ </div>
+   <p>Navštívil jsi tuto stránku {{ num_visits }}{% if num_visits == 1 %} krát{% else %} krát{% endif %}.</p>             
+  {% endblock %}
+  
